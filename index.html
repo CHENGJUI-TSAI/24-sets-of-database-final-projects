@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>長者健康追蹤系統</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <div class="custom-dropdown" id="customDropdown">
+            <button class="dropdown-toggle" id="dropdownToggle" aria-label="快速導航">
+              <span class="dropdown-label">選擇頁面</span>
+              <svg class="dropdown-arrow" viewBox="0 0 24 24" width="18" height="18">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div class="dropdown-menu" id="dropdownMenu">
+              <div class="dropdown-items" id="dropdownItems"></div>
+            </div>
+          </div>
+          <select id="topbarSelect" aria-label="快速導航" style="display:none"></select>
+        </div>
+        <div class="topbar-right">
+          <button class="theme-toggle" id="themeToggle" type="button" aria-label="切換夜間模式">夜間</button>
+          <button class="register-button" id="registerButton">註冊</button>
+          <button class="login-button" id="loginButton">登入</button>
+          <div class="notification-container">
+            <button class="icon-button" id="notificationButton" aria-label="通知">🔔<span class="badge" id="notificationBadge">5</span></button>
+            <div class="notification-panel" id="notificationPanel">
+              <div class="panel-header">
+                <h3>通知</h3>
+                <button class="panel-close" aria-label="關閉">✕</button>
+              </div>
+              <div class="notification-list" id="notificationList"></div>
+            </div>
+          </div>
+          <div class="message-container">
+            <button class="icon-button" id="messageButton" aria-label="訊息">💬<span class="badge" id="messageBadge">2</span></button>
+            <div class="message-panel" id="messagePanel">
+              <div class="panel-header">
+                <h3>訊息</h3>
+                <button class="panel-close" aria-label="關閉">✕</button>
+              </div>
+              <div class="message-list" id="messageList"></div>
+            </div>
+          </div>
+          <div class="profile" id="profileBox">
+            <div>
+              <span id="profileName">訪客</span>
+              <small id="profileRole">尚未登入</small>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div id="pagePanels">
+        <section class="page-panel" id="homePage">
+          <section class="hero-card">
+            <div class="hero-text">
+              <span class="eyebrow">長照服務專屬平台</span>
+              <h1>照護對象類型與專業照護員一目了然</h1>
+              <p>本系統提供社區長照需求評估、照護員分配、用藥追蹤與健康紀錄管理，協助家屬、管理者與照護員快速取得關鍵資訊。</p>
+            </div>
+            <div class="hero-illustration"></div>
+          </section>
+
+          <section class="service-intro-card">
+            <div class="service-intro-column">
+              <h2>長照服務對象</h2>
+              <ul>
+                <li>失智症長者：行為監控、記憶支持與情緒安撫</li>
+                <li>慢性病長者：血壓、血糖、用藥管理與營養控制</li>
+                <li>復健需求者：行動輔助、復健訓練與日常生活協助</li>
+                <li>長期照護家庭：提供照護規劃、服務追蹤與跨團隊協作</li>
+              </ul>
+            </div>
+            <div class="service-intro-column">
+              <h2>照護員資訊</h2>
+              <ul>
+                <li>專業失智護理：情緒照護與認知刺激</li>
+                <li>慢性病管理：用藥提醒與生活習慣追蹤</li>
+                <li>復健照護：活動協助與身體機能維護</li>
+                <li>藥物管理專長：過敏監控、服藥紀錄與健康追蹤</li>
+              </ul>
+            </div>
+          </section>
+
+          <section class="feature-highlights">
+            <div class="section-title"><h2>平台功能總覽</h2></div>
+            <div class="feature-grid">
+              <article class="feature-card">
+                <div class="feature-icon">🧩</div>
+                <h3>智能照護管理</h3>
+                <p>整合排程、提醒與每日記錄，讓照護員清楚掌握長者每日健康狀況。</p>
+              </article>
+              <article class="feature-card">
+                <div class="feature-icon">🧾</div>
+                <h3>病史與用藥追蹤</h3>
+                <p>紀錄病史、過敏與用藥資訊，協助家屬與照護員快速查看關鍵醫療資料。</p>
+              </article>
+              <article class="feature-card">
+                <div class="feature-icon">👪</div>
+                <h3>家屬申請審核</h3>
+                <p>家屬可線上申請照護對象，管理員審核後自動指派最適合照護員。</p>
+              </article>
+              <article class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>異常提醒與報表</h3>
+                <p>彙整高風險事件、活動狀態與健康紀錄，協助快速決策與資源調度。</p>
+              </article>
+            </div>
+          </section>
+
+          <section class="home-guest-intro" id="homeGuestIntro">
+            <div class="page-card">
+              <h2>訪客專屬說明</h2>
+              <p>這個平台提供長者健康追蹤、用藥管理、照護員指派與家屬申請功能。若要使用完整功能與查詢資料，請先登入。</p>
+            </div>
+          </section>
+
+          <div id="homeDashboardContent" class="hide-for-guest">
+            <section class="overview-grid" id="overviewGrid">
+              <article class="stat-card">
+                <div class="stat-icon">❤️</div>
+                <h3>健康異常提醒</h3>
+                <p class="stat-value" id="statAlerts">3 位</p>
+                <a href="#">查看詳情</a>
+              </article>
+              <article class="stat-card">
+                <div class="stat-icon">📌</div>
+                <h3>未完成健康紀錄</h3>
+                <p class="stat-value" id="statPending">5 筆</p>
+                <a href="#">查看詳情</a>
+              </article>
+              <article class="stat-card">
+                <div class="stat-icon">🗓️</div>
+                <h3>今日活動</h3>
+                <p class="stat-value" id="statEvents">2 場</p>
+                <a href="#">查看詳情</a>
+              </article>
+              <article class="stat-card">
+                <div class="stat-icon">🔔</div>
+                <h3>最新通知</h3>
+                <p class="stat-value" id="statNotices">1 則</p>
+                <a href="#">查看詳情</a>
+              </article>
+            </section>
+
+            <section class="quick-actions">
+              <div class="section-title"><h2>快速功能</h2></div>
+              <div class="action-grid">
+                <button class="action-item" data-action="elderDataPage" data-icon="🔍">長者資料查詢</button>
+                <button class="action-item" data-action="healthRecordsPage" data-icon="🩺">新增健康紀錄</button>
+                <button class="action-item" data-action="careServicesPage" data-icon="📝">新增照護紀錄</button>
+                <button class="action-item" data-action="activityPage" data-icon="🗓️">活動查詢</button>
+                <button class="action-item" data-action="changesPage" data-icon="📄">異動紀錄查詢</button>
+              </div>
+            </section>
+
+            <section class="risk-table-section">
+              <div class="section-title"><h2>高風險長者清單</h2></div>
+              <div class="table-wrapper">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>長者編號</th>
+                      <th>姓名</th>
+                      <th>健康等級</th>
+                      <th>異常項目</th>
+                      <th>最後紀錄時間</th>
+                      <th>操作</th>
+                    </tr>
+                  </thead>
+                  <tbody id="riskTableBody"></tbody>
+                </table>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section class="page-panel hidden" id="elderDataPage">
+          <div class="page-header"><h2>長者資料管理</h2></div>
+          <div class="page-card">
+            <p>此頁面用於查詢與編輯長者基本資料，包括姓名、聯絡方式、照護需求與家庭背景。</p>
+          </div>
+        </section>
+
+        <section class="page-panel hidden" id="healthRecordsPage">
+          <div class="page-header"><h2>健康紀錄管理</h2></div>
+          <div class="page-card">
+            <p>管理長者健康紀錄，如血壓、血糖、藥物服用、醫療建議與異常提醒。</p>
+          </div>
+        </section>
+
+        <section class="page-panel hidden" id="careServicesPage">
+          <div class="page-header"><h2>照護服務管理</h2></div>
+          <div class="page-card">
+            <p>照護員可查看自己的照護專長、適合對象與已分配的長者，並填寫每日照護紀錄。</p>
+            <div id="caregiverOverview"></div>
+            <div id="dailyRecordSection"></div>
+            <div id="dailyRecordList"></div>
+            <div id="careAssignments"></div>
+          </div>
+        </section>
+
+        <section class="page-panel hidden" id="activityPage">
+          <div class="page-header"><h2>活動參與管理</h2></div>
+          <div class="page-card">
+            <p>查看長者活動報名、參與狀態與活動成果，支援社區互動與健康促進。</p>
+          </div>
+        </section>
+
+        <section class="page-panel hidden" id="changesPage">
+          <div class="page-header"><h2>異動管理</h2></div>
+          <div class="page-card">
+            <p>管理員可審核家屬申請、指派照護員並追蹤審核狀態。</p>
+            <div id="adminApplications"></div>
+            <div id="adminRecordList"></div>
+            <div id="adminChangeLogList"></div>
+          </div>
+        </section>
+
+        <section class="page-panel hidden" id="familyPage">
+          <div class="page-header"><h2>家屬專區</h2></div>
+          <div class="page-card">
+            <p>家屬可填寫長者基本資料與病史、過敏史等資訊，申請照顧對象，並追蹤管理員審核進度。</p>
+            <div id="familyApplicationSection"></div>
+            <div id="familyApplicationList"></div>
+            <div id="familyRecordList"></div>
+          </div>
+        </section>
+
+        <section class="page-panel hidden" id="contactPage">
+          <div class="page-header"><h2>聯絡我們</h2></div>
+          <div class="page-card">
+            <p>提供客服與系統支援資訊，快速取得協助與技術支援。</p>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <aside class="right-panel">
+      <section class="card announcement-card">
+        <div class="card-header">
+          <h3>系統公告</h3>
+          <a href="#" data-panel-action="announcements">查看更多</a>
+        </div>
+        <ul class="announcement-list" id="announcementList"></ul>
+      </section>
+
+      <section class="card case-card">
+        <div class="card-header">
+          <h3>案件管理</h3>
+          <a href="#" data-panel-action="cases">查看全部</a>
+        </div>
+        <div class="case-summary" id="caseSummary"></div>
+        <div class="case-list" id="caseList"></div>
+      </section>
+
+      <section class="card link-card">
+        <h3>常用連結</h3>
+        <ul>
+          <li><a href="#" data-panel-action="downloads">官方下載區</a></li>
+          <li><a href="#" data-panel-action="elder-search">長者資料查詢</a></li>
+          <li><a href="#" data-panel-action="manual">系統使用說明</a></li>
+          <li><a href="#" data-panel-action="faq">常見問題 FAQ</a></li>
+        </ul>
+      </section>
+
+      <section class="card calendar-card">
+        <div class="card-header"><h3>行事曆</h3></div>
+        <div class="calendar" id="calendar"></div>
+      </section>
+    </aside>
+  </div>
+
+  <footer class="footer">
+    <p>社區長期照護與長者健康追蹤系統 Copyright © 2024 All Rights Reserved.</p>
+  </footer>
+
+  <div class="modal-overlay" id="modalOverlay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-header">
+        <strong id="modalTitle">功能提示</strong>
+        <button class="modal-close" id="modalClose">×</button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <div class="login-overlay hidden" id="loginOverlay" aria-hidden="true">
+    <div class="login-modal" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+      <div class="login-header">
+        <strong id="loginTitle">系統登入</strong>
+        <button class="modal-close" id="loginCancel">×</button>
+      </div>
+      <form id="loginForm">
+        <label>帳號
+          <input id="loginUsername" type="text" autocomplete="username" placeholder="請輸入帳號" required />
+        </label>
+        <label>密碼
+          <input id="loginPassword" type="password" autocomplete="current-password" placeholder="請輸入密碼" required />
+        </label>
+        <div class="login-actions">
+          <button type="submit">登入</button>
+          <button type="button" id="loginCancelButton">取消</button>
+        </div>
+        <p class="login-hint">測試帳號：admin/admin123（管理員）、care1/care123、care2/care123、care3/care123、care4/care123、care5/care123（不同照護員）、family/family123（家屬）</p>
+      </form>
+    </div>
+  </div>
+
+  <div class="login-overlay hidden" id="registerOverlay" aria-hidden="true">
+    <div class="login-modal" role="dialog" aria-modal="true" aria-labelledby="registerTitle">
+      <div class="login-header">
+        <strong id="registerTitle">家屬帳號註冊</strong>
+        <button class="modal-close" id="registerCancel">×</button>
+      </div>
+      <form id="registerForm">
+        <label>帳號
+          <input id="registerUsername" type="text" autocomplete="username" placeholder="請輸入帳號" required />
+        </label>
+        <label>密碼
+          <input id="registerPassword" type="password" autocomplete="new-password" placeholder="至少 6 個字元" minlength="6" required />
+        </label>
+        <label>家屬姓名
+          <input id="registerDisplayName" type="text" autocomplete="name" placeholder="例如：陳小姐" required />
+        </label>
+        <label>聯絡電話
+          <input id="registerPhone" type="tel" autocomplete="tel" placeholder="例如：0912-345-678" required />
+        </label>
+        <div class="login-actions">
+          <button type="submit">建立帳號</button>
+          <button type="button" id="registerCancelButton">取消</button>
+        </div>
+        <p class="login-hint">註冊後會建立家屬帳號。登入後可替多位長照需求者各送出一筆申請。</p>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
